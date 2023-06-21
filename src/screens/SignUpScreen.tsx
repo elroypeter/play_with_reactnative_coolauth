@@ -4,69 +4,69 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Text,
-  TextInput,
   TouchableOpacity,
   View,
+  Text,
+  TextInput,
 } from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import YellowSvg from '../assets/yellow.svg';
-import DarkSvg from '../assets/dark.svg';
-import BlueSvg from '../assets/blue.svg';
-
+import DarkSvg from '../assets/dark-signup.svg';
+import BlueSvg from '../assets/blue-signup.svg';
 import IconBack from '../assets/icons/arrow_back.svg';
 import IconForward from '../assets/icons/arrow_forward.svg';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-const LoginScreen = ({navigation}: any) => {
+const SignUpScreen = ({navigation}: any) => {
   return (
     <View style={{flex: 1}}>
       <StatusBar
-        barStyle="light-content"
-        backgroundColor={'transparent'}
+        barStyle={'light-content'}
         translucent
+        backgroundColor={'transparent'}
       />
-
-      <View style={[styles.bg]}>
-        <YellowSvg style={{position: 'absolute'}} />
+      <View style={{...styles.bg}}>
         <DarkSvg
-          style={{position: 'absolute', left: -250, top: -50}}
+          style={{position: 'absolute', top: -10, left: -200}}
+          height={800}
+          width={800}
+        />
+        <BlueSvg
+          style={{position: 'absolute', top: 0, left: -250}}
           height={1200}
           width={1200}
         />
-        <BlueSvg
-          style={{position: 'absolute', left: 40, top: -180}}
-          height={900}
-          width={900}
-        />
 
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView>
           {/* header */}
           <View
             style={{
+              flexDirection: 'row',
               marginHorizontal: 20,
-              marginTop: Platform.OS === 'android' ? 50 : 0,
+              marginTop: Platform.OS === 'android' ? 20 : 0,
             }}>
-            <IconBack height={28} width={28} fill={Colors.white} />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.goBack()}>
+              <IconBack height={28} width={28} fill={Colors.white} />
+            </TouchableOpacity>
           </View>
 
-          {/* welcome */}
-          <View style={{marginHorizontal: 20, marginTop: 50}}>
+          {/* title */}
+          <View style={{marginTop: 50, marginHorizontal: 20}}>
             <Text
-              style={{
-                color: Colors.white,
-                fontSize: 38,
-                fontWeight: 'bold',
-                maxWidth: 200,
-              }}>
-              Welcome Back
+              style={{fontSize: 38, color: Colors.white, fontWeight: '600'}}>
+              Create
+            </Text>
+            <Text
+              style={{fontSize: 38, color: Colors.white, fontWeight: '600'}}>
+              Account
             </Text>
           </View>
 
           {/* form */}
-          <View style={{marginHorizontal: 20, marginTop: 200}}>
+          <View style={{marginTop: 50, marginHorizontal: 20}}>
+            <FormField placeHolder="Name" />
             <FormField placeHolder="Email" />
             <FormField placeHolder="Password" />
           </View>
@@ -81,8 +81,8 @@ const LoginScreen = ({navigation}: any) => {
               alignItems: 'center',
             }}>
             <Text
-              style={{fontWeight: 'bold', color: Colors.dark, fontSize: 28}}>
-              Sign In
+              style={{fontWeight: 'bold', color: Colors.white, fontSize: 28}}>
+              Sign Up
             </Text>
 
             <TouchableOpacity
@@ -104,31 +104,22 @@ const LoginScreen = ({navigation}: any) => {
             </TouchableOpacity>
           </View>
 
-          {/* link */}
+          {/* links */}
           <View
             style={{marginHorizontal: 20, marginTop: 50, flexDirection: 'row'}}>
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => navigation.navigate('SignUpScreen')}>
+              onPress={() => navigation.navigate('LoginScreen')}>
               <Text
                 style={{
+                  color: Colors.white,
                   fontSize: 18,
                   fontWeight: '600',
                   textDecorationLine: 'underline',
                 }}>
-                Sign Up
+                Sign In
               </Text>
             </TouchableOpacity>
-
-            <Text
-              style={{
-                marginLeft: 30,
-                fontSize: 18,
-                fontWeight: '600',
-                textDecorationLine: 'underline',
-              }}>
-              Forgot Password
-            </Text>
           </View>
         </SafeAreaView>
       </View>
@@ -140,12 +131,16 @@ const FormField = ({placeHolder}: any) => {
   return (
     <View
       style={{
-        paddingVertical: 10,
+        paddingVertical: 20,
         borderBottomWidth: 1,
-        borderBottomColor: 'grey',
+        borderBottomColor: Colors.white,
         marginBottom: 20,
       }}>
-      <TextInput style={{fontSize: 18}} placeholder={placeHolder} />
+      <TextInput
+        style={{fontSize: 18, color: Colors.white}}
+        placeholder={placeHolder}
+        placeholderTextColor={Colors.white}
+      />
     </View>
   );
 };
@@ -153,10 +148,8 @@ const FormField = ({placeHolder}: any) => {
 const styles = StyleSheet.create({
   bg: {
     flex: 1,
-    position: 'relative',
     overflow: 'hidden',
-    zIndex: 0,
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;

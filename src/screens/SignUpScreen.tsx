@@ -37,13 +37,13 @@ const SignUpScreen = ({navigation}: any) => {
           width={1200}
         />
 
-        <SafeAreaView>
+        <SafeAreaView style={{flex: 1}}>
           {/* header */}
           <View
             style={{
               flexDirection: 'row',
               marginHorizontal: 20,
-              marginTop: Platform.OS === 'android' ? 20 : 0,
+              marginTop: Platform.OS === 'android' ? 50 : 0,
             }}>
             <TouchableOpacity
               activeOpacity={0.8}
